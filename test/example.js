@@ -12,6 +12,7 @@ describe('DefaultTest', () => {
     let driver;
     before(() => {
         driver = new Builder().forBrowser('chrome').build()
+        return driver
     })
 
     it('should go to nehalist.io and check the title', async () => {
