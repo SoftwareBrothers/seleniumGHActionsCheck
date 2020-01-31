@@ -11,7 +11,7 @@ const fs = require('fs')
 
 describe('DefaultTest', () => {
     let driver;
-    before(() => {
+    beforeEach(() => {
         driver = new Builder().forBrowser('chrome').build()
         return driver
     })
@@ -62,7 +62,7 @@ describe('DefaultTest', () => {
 
     });
 
-    after(async () => {
+    afterEach(async () => {
         driver.close()
         driver.quit()
     });
