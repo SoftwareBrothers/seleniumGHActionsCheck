@@ -15,6 +15,8 @@ describe('DefaultTest', () => {
     })
 
     it('should go to nehalist.io and check the title', async () => {
+        await driver.sleep(10000);
+
         await driver.manage().window().maximize();
         await driver.get('https://softwarebrothers.co/');
 
