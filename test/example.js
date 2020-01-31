@@ -7,6 +7,7 @@ const {
 const {
     expect
 } = require('chai');
+const fs = require('fs')
 
 describe('DefaultTest', () => {
     let driver;
@@ -20,7 +21,9 @@ describe('DefaultTest', () => {
         await driver.manage().window().maximize();
         await driver.get('https://softwarebrothers.co/');
         await driver.sleep(10000);
-
+        await driver.takeScreenshot().then(function (data) {
+            fs.writeFileSync('img.png', data, 'base64')
+        })
         await driver.findElement(By.linkText("Services")).click();
         await driver.sleep(2000);
         await driver.findElement(By.className(("webdev"))).click();
