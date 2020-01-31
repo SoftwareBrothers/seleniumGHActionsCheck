@@ -7,19 +7,31 @@ const {
 const {
     expect
 } = require('chai');
-const fs = require('fs')
+const {
+    Eyes,
+    ClassicRunner,
+    Target,
+    RectangleSize
+} = require('@applitools/eyes-selenium');
 
 describe('DefaultTest', () => {
+
     let driver;
+    let eyes;
+
     beforeEach(async () => {
-        driver = await new Builder().forBrowser('chrome').build()
-        return driver
+        driver = await new Builder().forBrowser('chrome').build();
+        runner = new ClassicRunner();
+        eyes = new Eyes(runner);
+        eyes.setApiKey('L7FtaWHGMkDYVj111K6pD101qPr0RaFb8sYADTANemhrHdQ110');
     })
 
     it('should go to nehalist.io and check the title', async () => {
+        await eyes.open(driver, 'Demo', 'Sample test');
 
         await driver.manage().window().maximize();
         await driver.get('https://softwarebrothers.co/');
+        await eyes.check("Login Window", Target.window())
         await driver.findElement(By.linkText("Services")).click();
         await driver.sleep(2000);
         await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
@@ -28,42 +40,46 @@ describe('DefaultTest', () => {
         await driver.sleep(2000);
         const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
         expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
-        await driver.sleep(2000);
 
     });
-    it('should go to nehalist.io and check the title', async () => {
+    // it('should go to nehalist.io and check the title', async () => {
 
-        await driver.manage().window().maximize();
-        await driver.get('https://softwarebrothers.co/');
-        await driver.findElement(By.linkText("Services")).click();
-        await driver.sleep(2000);
-        await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
-        await driver.sleep(2000);
-        await driver.findElement(By.className(("webdev"))).click();
-        await driver.sleep(2000);
-        const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
-        expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
-        await driver.sleep(2000);
+    //     await driver.manage().window().maximize();
+    //     await driver.get('https://softwarebrothers.co/');
+    //     await driver.findElement(By.linkText("Services")).click();
+    //     await driver.sleep(2000);
+    //     await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
+    //     await driver.sleep(2000);
+    //     await driver.findElement(By.className(("webdev"))).click();
+    //     await driver.sleep(2000);
+    //     const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
+    //     expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
+    //     await driver.sleep(2000);
 
-    });
-    it('should go to nehalist.io and check the title', async () => {
+    // });
+    // it('should go to nehalist.io and check the title', async () => {
 
-        await driver.manage().window().maximize();
-        await driver.get('https://softwarebrothers.co/');
-        await driver.findElement(By.linkText("Services")).click();
-        await driver.sleep(2000);
-        await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
-        await driver.sleep(2000);
-        await driver.findElement(By.className(("webdev"))).click();
-        await driver.sleep(2000);
-        const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
-        expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
-        await driver.sleep(2000);
+    //     await driver.manage().window().maximize();
+    //     await driver.get('https://softwarebrothers.co/');
+    //     await driver.findElement(By.linkText("Services")).click();
+    //     await driver.sleep(2000);
+    //     await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
+    //     await driver.sleep(2000);
+    //     await driver.findElement(By.className(("webdev"))).click();
+    //     await driver.sleep(2000);
+    //     const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
+    //     expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
+    //     await driver.sleep(2000);
 
-    });
+    // });
 
     afterEach(async () => {
+        await eyes.closeAsync();
         await driver.close()
-        await driver.quit()
+        await driver.quit();
+        await eyes.abortIfNotClosed();
+        const allTestResults = await runner.getAllTestResults();
+        console.log(allTestResults);
     });
+
 });

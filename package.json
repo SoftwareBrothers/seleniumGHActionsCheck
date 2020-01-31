@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha test/ --timeout 30000"
-
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@applitools/eyes-selenium": "^4.33.10",
     "mochawesome": "^4.1.0"
   },
   "dependencies": {
