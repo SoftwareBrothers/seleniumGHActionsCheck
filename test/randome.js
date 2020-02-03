@@ -26,10 +26,7 @@ describe('my test', () => {
                 break;
             }
             case "firefox": {
-                const driverPath = path.join(
-                    __dirname,
-                    "../Selenium.WebDriver.GeckoDriver.3.150.0/driver/"
-                );
+                const driverPath = path.join(`D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck`);
                 process.env.PATH = `${process.env.PATH};${driverPath};`;
                 capabilities = webdriver.Capabilities.firefox();
                 break;
