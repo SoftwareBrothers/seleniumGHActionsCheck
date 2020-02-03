@@ -42,6 +42,8 @@ jobs:
       - run: nuget install Selenium.WebDriver.GeckoDriver -Version 0.26.0
       - run: cd D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck
       - run: dir
+      - run: cd Selenium.WebDriver.GeckoDriver.0.26.0
+      - run: dir
       - run: npm run test
         env:
           BROWSER: firefox
