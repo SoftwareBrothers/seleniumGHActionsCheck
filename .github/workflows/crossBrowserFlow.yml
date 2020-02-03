@@ -31,7 +31,7 @@ jobs:
         env:
           BROWSER: safari
   e2e-firefox:
-    runs-on: windows-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
       - uses: warrenbuckley/Setup-Nuget@v1
@@ -39,11 +39,6 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - run: nuget install Selenium.WebDriver.GeckoDriver -Version 0.26.0
-      - run: cd D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck
-      - run: dir
-      - run: cd Selenium.WebDriver.GeckoDriver.0.26.0
-      - run: dir
       - run: npm run test
         env:
           BROWSER: firefox
