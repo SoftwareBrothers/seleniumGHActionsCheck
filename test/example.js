@@ -2,7 +2,9 @@ const {
     Builder,
     By,
     Key,
-    until
+    until,
+    WebDriver,
+    Capabilities
 } = require('selenium-webdriver');
 const {
     expect
@@ -21,7 +23,7 @@ describe('DefaultTest', () => {
 
     beforeEach(async () => {
         //let capabilities = webdriver.Capabilities.safari();
-        driver = await new Builder().forBrowser('safari').build();
+        driver = await new Builder().forBrowser('ie').build();
         //   runner = new ClassicRunner();
         //  eyes = new Eyes(runner);
         //  eyes.setApiKey('L7FtaWHGMkDYVj111K6pD101qPr0RaFb8sYADTANemhrHdQ110');
