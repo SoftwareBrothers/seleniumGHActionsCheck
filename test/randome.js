@@ -8,7 +8,7 @@ let driver = webdriver.WebDriver;
 describe('my test', () => {
     before(async () => {
         let capabilities = webdriver.Capabilities;
-        switch (process.env.BROWSER || "chrome") {
+        switch ('firefox') {
             case "ie": {
                 // HACK: include IEDriver path by nuget
                 const driverPath = path.join(
