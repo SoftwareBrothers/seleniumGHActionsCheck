@@ -13,7 +13,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: nuget install Selenium.WebDriver.IEDriver -Version 3.150.0
-      - run: setx /m path %path%;D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck
       - run: npm run test
         env:
           BROWSER: ie
