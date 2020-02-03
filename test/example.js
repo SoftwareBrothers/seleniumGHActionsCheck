@@ -23,7 +23,7 @@ describe('DefaultTest', () => {
 
     beforeEach(async () => {
         //let capabilities = webdriver.Capabilities.safari();
-        driver = await new Builder().forBrowser('ie').build();
+        driver = await new Builder().forBrowser('chrome').build();
         //   runner = new ClassicRunner();
         //  eyes = new Eyes(runner);
         //  eyes.setApiKey('L7FtaWHGMkDYVj111K6pD101qPr0RaFb8sYADTANemhrHdQ110');
