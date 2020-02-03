@@ -1,7 +1,7 @@
 // e2e/runWithSelenium.ts
-import webdriver from "selenium-webdriver";
-import assert from "assert";
-import path from "path";
+const webdriver = require("selenium-webdriver");
+const assert = require("assert");
+const path = require("path");
 
 let driver = webdriver.WebDriver;
 
