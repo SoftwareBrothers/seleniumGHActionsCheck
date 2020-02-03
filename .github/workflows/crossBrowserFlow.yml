@@ -31,13 +31,14 @@ jobs:
         env:
           BROWSER: safari
   e2e-firefox:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
       - run: npm install
+      - run: export PATH=$PATH:$(pwd)/node_modules/geckodriver/bin >> ~/.profile
       - run: npm run test
         env:
           BROWSER: firefox
