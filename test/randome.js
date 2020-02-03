@@ -26,7 +26,11 @@ describe('my test', () => {
                 break;
             }
             case "firefox": {
-                require("geckodriver");
+                const driverPath = path.join(
+                    __dirname,
+                    "../Selenium.WebDriver.GeckoDriver.3.150.0/driver/"
+                );
+                process.env.PATH = `${process.env.PATH};${driverPath};`;
                 capabilities = webdriver.Capabilities.firefox();
                 break;
             }
