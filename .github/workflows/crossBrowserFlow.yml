@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - run: npm install -g geckodriver
+      - run: nuget install Selenium.WebDriver.GeckoDriver -Version 0.26.0
       - run: npm run test
         env:
           BROWSER: firefox
