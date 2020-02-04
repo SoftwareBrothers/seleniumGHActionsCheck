@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
+      - run: osascript safariscript
       - run: |
           sudo safaridriver --enable
           safaridriver -p 0 &
