@@ -37,9 +37,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: sudo apt-get update && sudo apt-get install firefox
       - run: npm install
-      - run: export PATH=$PATH:$(pwd)/node_modules/geckodriver/bin >> ~/.profile
       - run: npm run test
         env:
           BROWSER: firefox
