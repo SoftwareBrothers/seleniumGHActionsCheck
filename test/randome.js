@@ -1,5 +1,6 @@
 // e2e/runWithSelenium.ts
 const webdriver = require("selenium-webdriver");
+const firefox = require("selenium-webdriver/firefox");
 const assert = require("assert");
 const path = require("path");
 
@@ -8,7 +9,7 @@ let driver = webdriver.WebDriver;
 describe('my test', () => {
     before(async () => {
         let capabilities = webdriver.Capabilities;
-        switch (process.env.BROWSER || "chrome") {
+        switch (process.env.BROWSER || "firefox") {
             case "ie": {
                 // HACK: include IEDriver path by nuget
                 const driverPath = path.join(
@@ -26,10 +27,14 @@ describe('my test', () => {
                 break;
             }
             case "firefox": {
-                const driverPath = path.join(`D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck`);
-                process.env.PATH = `${process.env.PATH};${driverPath};`;
+                const driverPath = path.join(`${__dirname}/node_modules/geckodriver/bin`);
+                process.env.PATH = `${process.env.PATH}:${driverPath}:`;
                 capabilities = webdriver.Capabilities.firefox();
-                break;
+                driver = await new webdriver.Builder()
+                  .withCapabilities(capabilities)
+                  .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
+                  .build();
+                return;
             }
             case "chrome": {
                 require("chromedriver");
