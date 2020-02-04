@@ -29,6 +29,7 @@ describe('my test', () => {
                 const driverPath = path.join(`D:\a\seleniumGHActionsCheck\seleniumGHActionsCheck`);
                 process.env.PATH = `${process.env.PATH};${driverPath};`;
                 capabilities = webdriver.Capabilities.firefox();
+                capabilities.set('moz:firefoxOptions.binary', `${__dirname}/node_modules/geckodriver/bin/geckodriver`)
                 break;
             }
             case "chrome": {
