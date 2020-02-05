@@ -11,11 +11,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: npm install -g webdriver-manager
       - run: npm install
-      - run: nuget install Selenium.WebDriver.IEDriver -Version 3.150.0
+      - run: webdriver-manager update
+      - run: npm install
       - run: npm run test
         env:
-          BROWSER: ie
+          BROWSER: edge
   e2e-safari:
     runs-on: macos-latest
     steps:
