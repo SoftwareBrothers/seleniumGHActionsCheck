@@ -38,7 +38,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: npm install -g webdriver-manager
       - run: npm install
+      - run: webdriver-manager update
+      - run: firefox --version
       - run: npm run test
         env:
           BROWSER: firefox
