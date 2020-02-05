@@ -44,14 +44,13 @@ describe('my test', () => {
                 break;
             }
             case "firefox": {
-                const driverPath = path.join(`${__dirname}/node_modules/geckodriver/bin`);
-                process.env.PATH = `${process.env.PATH}:${driverPath}:`;
+                 require("geckodriver");
                 capabilities = webdriver.Capabilities.firefox();
-                driver = await new webdriver.Builder()
-                    .withCapabilities(capabilities)
-    //                .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
-                    .build();
-                return;
+//                 driver = await new webdriver.Builder()
+//                     .withCapabilities(capabilities)
+//     //                .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
+//                     .build();
+                break;
             }
             case "chrome": {
                 require("chromedriver");
