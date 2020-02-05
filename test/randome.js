@@ -30,7 +30,7 @@ describe('my test', () => {
             case "edge": {
                 // HACK: include IEDriver path by nuget
                 require('edgedriver');
-                capabilities = webdriver.Capabilities.ie();
+                capabilities = webdriver.Capabilities.edge();
                 break;
             }
             case "safari": {
