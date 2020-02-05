@@ -41,7 +41,6 @@ jobs:
       - run: npm install -g webdriver-manager
       - run: npm install
       - run: webdriver-manager update
-      - run: firefox --version
       - run: npm run test
         env:
           BROWSER: firefox
