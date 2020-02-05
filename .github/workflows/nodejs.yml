@@ -38,7 +38,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: sudo apt install firefox
       - run: npm install
       - run: npm run test
         env:
