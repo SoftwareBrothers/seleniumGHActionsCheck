@@ -49,7 +49,7 @@ describe('my test', () => {
                 capabilities = webdriver.Capabilities.firefox();
                 driver = await new webdriver.Builder()
                     .withCapabilities(capabilities)
-                    .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
+    //                .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
                     .build();
                 return;
             }
