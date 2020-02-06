@@ -3,13 +3,29 @@ const webdriver = require("selenium-webdriver");
 const firefox = require("selenium-webdriver/firefox");
 const assert = require("assert");
 const path = require("path");
-
+const {
+    Builder,
+    By,
+    Key,
+    until,
+    WebDriver,
+    Capabilities
+} = require('selenium-webdriver');
+const {
+    expect
+} = require('chai');
+const {
+    Eyes,
+    ClassicRunner,
+    Target,
+    RectangleSize
+} = require('@applitools/eyes-selenium');
 let driver = webdriver.WebDriver;
 
 describe('my test', () => {
     before(async () => {
         let capabilities = webdriver.Capabilities;
-        switch (process.env.BROWSER || "firefox") {
+        switch (process.env.BROWSER || "chrome") {
             case "ie": {
                 // HACK: include IEDriver path by nuget
                 const driverPath = path.join(
@@ -27,26 +43,13 @@ describe('my test', () => {
                 break;
             }
             case "firefox": {
-                const driverPath = path.join(`${__dirname}/node_modules/geckodriver/bin`);
-                process.env.PATH = `${process.env.PATH}:${driverPath}:`;
+                require("geckodriver");
                 capabilities = webdriver.Capabilities.firefox();
-                driver = await new webdriver.Builder()
-                  .withCapabilities(capabilities)
-                  .setFirefoxOptions(new firefox.Options().addArguments('--headless'))
-                  .build();
-                return;
+                break;
             }
             case "chrome": {
                 require("chromedriver");
                 capabilities = webdriver.Capabilities.chrome();
-                capabilities.set("chromeOptions", {
-                    args: [
-                        "--headless",
-                        "--no-sandbox",
-                        "--disable-gpu",
-                        "--window-size=1980,1200"
-                    ]
-                });
                 break;
             }
         }
@@ -59,8 +62,16 @@ describe('my test', () => {
         await driver.quit()
     });
 
-    it("Google", async () => {
-        await driver.get('http://google.com');
-        assert.equal(await driver.getTitle(), "Google");
+    it('Just testing flow for selenium in SB company', async () => {
+        await driver.manage().window().maximize();
+        await driver.get('https://softwarebrothers.co/');
+        await driver.findElement(By.linkText("Services")).click();
+        await driver.sleep(2000);
+        await driver.wait(until.elementIsVisible(driver.findElement(By.xpath("//a[@aria-label= 'dismiss cookie message' and @role='button']")))).click();
+        await driver.sleep(2000);
+        await driver.findElement(By.className(("webdev"))).click();
+        await driver.sleep(2000);
+        const title = await (await driver.findElement(By.xpath("//*[text()='Web Design and Development']"))).getText();
+        expect(title.toUpperCase()).to.have.string('WEB DESIGN AND DEVELOPMENT');
     });
 });
