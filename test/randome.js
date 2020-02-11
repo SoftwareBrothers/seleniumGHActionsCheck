@@ -27,7 +27,7 @@ let driver = webdriver.WebDriver;
 describe('my test', () => {
     before(async () => {
         const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload.commits[0].author.email}`);
+        console.log(`The event payload: ${payload.commits}`);
         let capabilities = webdriver.Capabilities;
         switch (process.env.BROWSER || "chrome") {
             case "ie": {
@@ -36,6 +36,7 @@ describe('my test', () => {
                     __dirname,
                     "../Selenium.WebDriver.IEDriver.3.150.0/driver/"
                 );
+
                 process.env.PATH = `${process.env.PATH};${driverPath};`;
                 capabilities = webdriver.Capabilities.ie();
                 capabilities.set("ignoreProtectedModeSettings", true);
