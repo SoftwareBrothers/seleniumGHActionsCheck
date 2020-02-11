@@ -20,10 +20,14 @@ const {
     Target,
     RectangleSize
 } = require('@applitools/eyes-selenium');
+const github = require('@actions/github');
+
 let driver = webdriver.WebDriver;
 
 describe('my test', () => {
     before(async () => {
+        const payload = JSON.stringify(github.context.payload, undefined, 2)
+        console.log(`The event payload: ${payload}`);
         let capabilities = webdriver.Capabilities;
         switch (process.env.BROWSER || "chrome") {
             case "ie": {
