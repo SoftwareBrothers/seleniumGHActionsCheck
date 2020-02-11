@@ -27,17 +27,20 @@ jobs:
       - run: |
           sudo safaridriver --enable
           safaridriver -p 0 &
+      - run: osascript safariscript
       - run: npm run test
         env:
           BROWSER: safari
   e2e-firefox:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: npm install -g webdriver-manager
       - run: npm install
+      - run: webdriver-manager update
       - run: npm run test
         env:
           BROWSER: firefox
