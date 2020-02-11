@@ -26,8 +26,8 @@ let driver = webdriver.WebDriver;
 
 describe('my test', () => {
     before(async () => {
-        const payload = JSON.parse(JSON.stringify(github.context.payload, undefined, 2))
-        console.log(`The event payload: ${payload}`);
+        const payload = github.context.payload;
+        console.log(`The event payload: ${payload.commits[0].author.email}`);
         let capabilities = webdriver.Capabilities;
         switch (process.env.BROWSER || "chrome") {
             case "ie": {
